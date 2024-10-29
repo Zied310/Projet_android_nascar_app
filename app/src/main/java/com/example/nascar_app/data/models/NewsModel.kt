@@ -1,4 +1,4 @@
-package com.example.nascar_app.models
+package com.example.nascar_app.data.models
 
 data class NewsModel(
     val image: Int,

@@ -5,8 +5,8 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.example.nascar_app.R
+import com.example.nascar_app.data.models.NewsModel
 import com.example.nascar_app.items.NewsItem
-import com.example.nascar_app.models.NewsModel
 
 @Composable
 fun NewsScreen(modifier: Modifier) {
