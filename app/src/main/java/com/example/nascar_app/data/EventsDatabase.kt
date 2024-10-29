@@ -21,9 +21,7 @@ abstract class EventsDatabase : RoomDatabase() {
                     context.applicationContext,
                     EventsDatabase::class.java,
                     "events_db"
-                )
-                    .allowMainThreadQueries()
-                    .build()
+                ).build()
                 INSTANCE = instance
                 instance
             }

@@ -10,7 +10,11 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ExitToApp
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
@@ -62,6 +66,8 @@ class MainActivity : ComponentActivity() {
     @Composable
     fun mainAppScreen(modifier: Modifier, navController: NavController, context : Context) {
         var selectedTabIndex by remember { mutableStateOf(0) }
+        val context = LocalContext.current // Get the current context
+        val loginPreferenceManager = LoginPreferenceManager(context)
         Scaffold(
             topBar = {
                 TopAppBar(
@@ -71,7 +77,19 @@ class MainActivity : ComponentActivity() {
                     colors = TopAppBarDefaults.largeTopAppBarColors(
                         containerColor = Color.Black,
                         titleContentColor = Color.White
-                    )
+                    ),
+                    actions = {
+                        IconButton(onClick = {
+                            navController.navigate("login_form")
+                            loginPreferenceManager.clearLoginDetails()
+                        }) {
+                            Icon(
+                                imageVector = Icons.Filled.ExitToApp,
+                                contentDescription = "Logout",
+                                tint = Color.White // Change to your desired icon color
+                            )
+                        }
+                    }
                 )
             },
             content = { paddingValues ->

@@ -23,13 +23,16 @@ import androidx.navigation.NavController
 import com.example.nascar_app.R
 import com.example.nascar_app.data.EventsDatabase
 import com.example.nascar_app.data.models.EventModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 @Composable
 fun EventsScreen(modifier: Modifier, navController: NavController, context: Context) {
 
     val db = EventsDatabase.getDatabase(context = context)
+    print("got db context")
     val coroutineScope = rememberCoroutineScope()
 
 
@@ -70,7 +73,10 @@ fun EventsScreen(modifier: Modifier, navController: NavController, context: Cont
                     button = {
                         IconButton(onClick = {
                             coroutineScope.launch {
-                                db.eventDao().addEventToFavorites(eventItem)
+                                withContext(Dispatchers.IO){
+                                    db.eventDao().addEventToFavorites(eventItem)
+                                    print("added event to favorites")
+                                }
                             }
                         }) {
                             Icon(Icons.Filled.Favorite, contentDescription = "Add to favorites")

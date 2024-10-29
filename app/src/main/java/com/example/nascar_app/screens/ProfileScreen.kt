@@ -95,8 +95,10 @@ fun ProfileScreen(modifier : Modifier, context: Context){
                 button = {
                     IconButton(onClick = {
                         coroutineScope.launch {
-                            db.eventDao().removeEventFromFavorites(event.id)
-                            favoriteEventsState.value = db.eventDao().getFavoriteEvents()
+                            withContext(Dispatchers.IO){
+                                db.eventDao().removeEventFromFavorites(event.id)
+                                favoriteEventsState.value = db.eventDao().getFavoriteEvents()
+                            }
                         }
                     }) {
                         Icon(Icons.Filled.Favorite, contentDescription = "Add to favorites")
