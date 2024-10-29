@@ -9,5 +9,5 @@ data class EventModel(
     @PrimaryKey(autoGenerate = true) val id: Int = 5,
     val title: String,
     val date: String,
-    val isFavorite: Boolean = false
+    var isFavorite: Short = 0
 )

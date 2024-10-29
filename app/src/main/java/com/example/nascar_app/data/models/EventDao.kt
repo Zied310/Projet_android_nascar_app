@@ -18,7 +18,9 @@ interface EventDao {
     suspend fun getFavoriteEvents(): List<EventModel>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun addEventToFavorites(event: EventModel)
+    suspend fun addEventToFavorites(event: EventModel){
+        event.isFavorite = 1
+    }
 
     @Query("DELETE FROM events WHERE id = :eventId")
     suspend fun removeEventFromFavorites(eventId: Int)
